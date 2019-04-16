@@ -8,19 +8,19 @@ const bodyParser = require('body-parser');
 const app = express()
 const port = 3001
 
-const gateway1Proxy = httpProxy('https://gtw1.rafaelverger.com.br');
-const gateway2Proxy = httpProxy('https://gtw2.rafaelverger.com.br');
+//const gateway1Proxy = httpProxy('https://gtw1.rafaelverger.com.br');
+//const gateway2Proxy = httpProxy('https://gtw2.rafaelverger.com.br');
 
-//app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-require('./app/routes')(app, {});
+router = require('./app/routes');
+app.use(router)
 
 var server = http.createServer(app);
-server.listen(3000);
+server.listen(port);
 
 //app.listen(port, () => {
 //  console.log(`Server running at http://localhost:${port}`)
