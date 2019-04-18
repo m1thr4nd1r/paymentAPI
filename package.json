@@ -24,8 +24,10 @@
     "express-http-proxy": "^1.5.1",
     "helmet": "^3.16.0",
     "http": "0.0.0",
+    "http-proxy": "^1.17.0",
     "morgan": "^1.9.1",
     "request": "^2.88.0",
+    "restify": "^8.3.0",
     "tape": "^4.10.1"
   },
   "devDependencies": {
