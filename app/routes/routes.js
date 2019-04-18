@@ -1,14 +1,20 @@
-const httpProxy = require('express-http-proxy')
+const express = require('express');
+const gatewayServices = require('./gateways')
 
-const gateway1Proxy = httpProxy('https://gtw1.rafaelverger.com.br');
-const gateway2Proxy = httpProxy('https://gtw2.rafaelverger.com.br');
+const router = express.Router()
 
-module.exports = function(app, db) 
+// router.use((req, res, next) => {
+//     console.log("Called: ", req.path)
+//     next()
+//     console.log("Route: " + s)
+// })
+
+router.post('/clients', (req, res, next) => 
 {
-	app.post('/clients', (req,res) => 
-	{
-		console.log(req.body)
-		//gateway1Proxy(req, res);
-		res.send("Hello")
-	});
-};
+	console.log(req.url + " called")
+	next()
+});
+
+router.use(gatewayServices)
+
+module.exports = router

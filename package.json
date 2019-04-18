@@ -18,13 +18,16 @@
   },
   "homepage": "https://github.com/m1thr4nd1r/paymentAPI#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-http-proxy": "^1.5.1",
     "helmet": "^3.16.0",
     "http": "0.0.0",
+    "http-proxy": "^1.17.0",
     "morgan": "^1.9.1",
     "request": "^2.88.0",
+    "restify": "^8.3.0",
     "tape": "^4.10.1"
   },
   "devDependencies": {
