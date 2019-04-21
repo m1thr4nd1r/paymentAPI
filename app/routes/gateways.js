@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const util = require('util')
+const db = require('../../db');
 
 const router = express.Router()
 
@@ -11,13 +12,32 @@ var api = ''
 
 router.get('/clients/:id', (req, res) => {
 	console.log(req.url + " called (" + req.method + ")");
-	
+	var Client = db.Mongoose.model('clients', db.ClientSchema, 'clients');
+
+	//var id = parseInt(req.params.id, 10);
+	var client = null
+
+	//Client.find({clientID: id}, function(err, objs)
+	Client.findById(req.params.id, function(err, objs)
+	{
+		if (err != null)
+		{
+			console.log(err)
+			res.send("Cliente não encontrado.")
+		}
+
+		console.log("Objs: " + util.inspect(objs))
+		client = objs
+    });
+
+    console.log("Client: " + util.inspect(client))
+
 	const getUserService1 = axios.request(
 	{
 		baseURL: gatewayURL,
 		url: req.path,
 		method: 'get',
-		data: req.params
+		data: (client != null) ? client.service1ID : null,
 	});
 
 	axios.all([getUserService1, getUserService1])
