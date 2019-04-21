@@ -9,6 +9,12 @@ const router = express.Router()
 //     console.log("Route: " + s)
 // })
 
+router.get('/clients/:id', (req, res, next) =>
+{
+	console.log(req.url + " called")
+	next()
+});
+
 router.post('/clients', (req, res, next) => 
 {
 	console.log(req.url + " called")
