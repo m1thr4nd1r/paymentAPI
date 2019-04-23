@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const router = require('./app/routes');
 
-const port = 3001
+const port = process.env.PORT
 const app = express()
 
 app.use(logger('dev'));
