@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/paymentAPI', {useNewUrlParser: true});
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 
 var clientSchema = new mongoose.Schema(
 {
