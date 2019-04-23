@@ -18,43 +18,39 @@ async function getClients(req, res)
 	{
 		const ClientsDB = db.Mongoose.model('clients', db.ClientSchema, 'clients');
 
-		var client = null
-
-		client = await ClientsDB.findById(req.params.id)
-		// , function(err, objs)
-		// {
-		// 	if (err != null)
-		// 	{
-		// 		console.log(err)
-		// 		res.send("Cliente não encontrado.")
-		// 	}
-
-		// 	client = objs
-	 //    });
-
+		var client = await ClientsDB.findById(req.params.id)
 	    console.log("Client: " + util.inspect(client));
-
-	    debugger;
 
 		const getUserService1 = await axios.request(
 		{
-			baseURL: gatewayURL,
+			baseURL: gateway1URL,
 			url: "/clients/" + client._doc.service1ID,
 			method: 'get',
 		});
 
 		const getUserService2 = await axios.request(
 		{
-			baseURL: gatewayURL,
+			baseURL: gateway2URL,
 			url: "/clients/" + client._doc.service2ID,
 			method: 'get',
 		});
 
 	    var services = await axios.all([getUserService1, getUserService2]);
 
+	    debugger;
+
+	    var mergeClient = { 
+	    					_id: req.params.id,
+	    					createdAt: services[0].data.createdAt,
+	    					first_name: services[0].data.first_name,
+	    					last_name: services[0].data.last_name,
+	    					fullname: services[1].data.fullname,
+	    					email: services[0].data.email,
+	    				  };
+
 		console.log("\nService 1\n" + util.inspect(services[0].data));
 		console.log("\nService 2\n" + util.inspect(services[1].data));
-		return res.send("Service 1: " + util.inspect(services[0].data) + "\nService 2: " + util.inspect(services[1].data) + "\n");
+		return res.send(mergeClient)
 	}
 	catch (error)
 	{
@@ -71,7 +67,7 @@ async function createClient(req, res, next)
 	{
 		const createUserService1 = await axios.request(
 		{
-			baseURL: gatewayURL,
+			baseURL: gateway1URL,
 			url: req.path,
 			method: 'post',
 			data: req.body
@@ -79,7 +75,7 @@ async function createClient(req, res, next)
 
 		const createUserService2 = await axios.request(
 		{
-			baseURL: gatewayURL,
+			baseURL: gateway2URL,
 			url: req.path,
 			method: 'post',
 			data: 
