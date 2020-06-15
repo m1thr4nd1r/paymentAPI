@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/m1thr4nd1r/paymentAPI#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-http-proxy": "^1.5.1",
