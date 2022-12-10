@@ -21,7 +21,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-http-proxy": "^1.5.1",
     "helmet": "^3.16.0",
     "http": "0.0.0",
